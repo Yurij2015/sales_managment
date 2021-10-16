@@ -19,6 +19,15 @@ class Customer
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
+    private $id;
+
+    public function __toString(){
+        return $this->fullname;
+    }
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $fullname;
 
     /**

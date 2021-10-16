@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -43,11 +44,11 @@ class CustomerCrudController extends AbstractCrudController
 //            TextField::new('title'),
 //            TextEditorField::new('description'),
 //        ];
-        yield TextField::new('fullname');
+        yield TextField::new('fullname', $this->translator->trans('FullName'));
         yield TextField::new('address');
         yield TextField::new('phone');
         yield EmailField::new('email');
-        yield TextareaField::new('access_info');
+        yield TextEditorField::new('access_info');
     }
 
 }

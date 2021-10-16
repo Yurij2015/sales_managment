@@ -8,9 +8,18 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CustomerCrudController extends AbstractCrudController
 {
+
+    private $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public static function getEntityFqcn(): string
     {
         return Customer::class;
@@ -20,8 +29,8 @@ class CustomerCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('Customer')
-            ->setEntityLabelInPlural('Customers')
+            ->setEntityLabelInSingular($this->translator->trans('Customer'))
+            ->setEntityLabelInPlural($this->translator->trans('Customers'))
             ->setSearchFields(['fullname, phone'])
             ->setDefaultSort(['fullname' => 'DESC']);
     }

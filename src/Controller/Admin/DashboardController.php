@@ -17,9 +17,7 @@ use App\Entity\Order;
 
 class DashboardController extends AbstractDashboardController
 {
-    /**
-     * @Route("/admin", name="admin")
-     */
+
     public function index(): Response
     {
 //        return parent::index();
@@ -31,19 +29,28 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Sales Management');
+            ->setTitle('Sales Management')
+            ->setFaviconPath('favicon.svg')
+            ->generateRelativeUrls()
+            ->disableUrlSignatures()
+            ->setTranslationDomain('admin');
+//            ->renderSidebarMinimized();
     }
 
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::section('Sales management');
         yield MenuItem::linkToCrud('Customers', 'fas fa-users', Customer::class);
         yield MenuItem::linkToCrud('Orders', 'fa fa-list-alt', Order::class);
         yield MenuItem::linkToCrud('Services', 'fa fa-sort-amount-asc', Service::class);
         yield MenuItem::linkToCrud('Products', 'fa fa-cube', Product::class);
         yield MenuItem::linkToCrud('Applications', 'fa fa-bars', ApplicationForm::class);
-        yield MenuItem::linkToCrud('Object in applications', 'fa fa-object-group
-', ObjectInAppForm::class);
+        yield MenuItem::linkToCrud('Object in applications', 'fa fa-object-group', ObjectInAppForm::class);
+        yield MenuItem::section('Administration tools');
+//        yield MenuItem::linkToLogout('Logout', 'fa fa-exit');
+        yield MenuItem::linkToUrl('Search in Google', 'fab fa-google', 'https://google.com');
+
 
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }

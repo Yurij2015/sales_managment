@@ -43,6 +43,11 @@ class Product
      */
     private $object_in_app_form;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
     public function __construct()
     {
         $this->object_in_app_form = new ArrayCollection();
@@ -127,6 +132,18 @@ class Product
                 $objectInAppForm->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

@@ -6,7 +6,6 @@ use App\Repository\ApplicationFormRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Core\Annotation\ApiResource;
 /**
  * @ORM\Entity(repositoryClass=ApplicationFormRepository::class)
  */
@@ -20,6 +19,29 @@ class ApplicationForm
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $aplformtitle;
+
+
+    public function __toString(){
+        return $this->aplformtitle;
+    }
+
+
+    public function getAplformtitle(): ?string
+    {
+        return $this->aplformtitle;
+    }
+
+    public function setAplformtitle(string $aplformtitle): self
+    {
+        $this->aplformtitle = $aplformtitle;
+
+        return $this;
+    }
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $appdate;
@@ -31,7 +53,7 @@ class ApplicationForm
 
     /**
      * @ORM\OneToOne(targetEntity=Order::class, inversedBy="application_form_id", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $orders;
 

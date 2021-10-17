@@ -7,10 +7,20 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CustomerCrudController extends AbstractCrudController
 {
+
+    private $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public static function getEntityFqcn(): string
     {
         return Customer::class;
@@ -20,8 +30,8 @@ class CustomerCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('Customer')
-            ->setEntityLabelInPlural('Customers')
+            ->setEntityLabelInSingular($this->translator->trans('Customer'))
+            ->setEntityLabelInPlural($this->translator->trans('Customers'))
             ->setSearchFields(['fullname, phone'])
             ->setDefaultSort(['fullname' => 'DESC']);
     }
@@ -34,11 +44,13 @@ class CustomerCrudController extends AbstractCrudController
 //            TextField::new('title'),
 //            TextEditorField::new('description'),
 //        ];
-        yield TextField::new('fullname');
+        yield TextField::new('fullname', $this->translator->trans('FullName'));
         yield TextField::new('address');
         yield TextField::new('phone');
         yield EmailField::new('email');
-        yield TextareaField::new('access_info');
+        yield TextEditorField::new('access_info')->formatValue(function ($value) {
+            return $value;
+        });
     }
 
 }

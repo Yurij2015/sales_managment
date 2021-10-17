@@ -1,0 +1,9 @@
+easy_admin:
+  entities:
+    ApplicationForm:
+      class: App\Entity\ApplicationForm
+      form:
+        fields:
+          - 'id'
+          - 'date'
+          - { property: 'firstDiscoveredAt', format: 'M Y', label: 'Discovered' }

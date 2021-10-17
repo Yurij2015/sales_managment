@@ -2,17 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CustomerRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Repository\EmployeeRepository;
 use Doctrine\ORM\Mapping as ORM;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Entity(repositoryClass=CustomerRepository::class)
+ * @ORM\Entity(repositoryClass=EmployeeRepository::class)
  */
-class Customer
+class Employee
 {
     /**
      * @ORM\Id
@@ -20,10 +16,6 @@ class Customer
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    public function __toString(){
-        return $this->fullname;
-    }
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -48,16 +40,42 @@ class Customer
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $access_info;
+    private $employee_info;
 
     /**
-     * @ORM\OneToMany(targetEntity=Order::class, mappedBy="customer")
+     * @ORM\ManyToOne(targetEntity=Position::class, inversedBy="employee")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $orders;
+    private $position;
 
-    public function __construct()
+    public function getPosition(): ?Position
     {
-        $this->orders = new ArrayCollection();
+        return $this->position;
+    }
+
+    public function setPosition(?Position $position): self
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Branch::class, inversedBy="employee")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $branch;
+
+    public function getBranch(): ?Branch
+    {
+        return $this->branch;
+    }
+
+    public function setBranch(?Branch $branch): self
+    {
+        $this->branch = $branch;
+
+        return $this;
     }
 
     public function getId(): ?int
@@ -113,46 +131,17 @@ class Customer
         return $this;
     }
 
-    public function getAccessInfo(): ?string
+    public function getEmployeeInfo(): ?string
     {
-        return $this->access_info;
+        return $this->employee_info;
     }
 
-    public function setAccessInfo(?string $access_info): self
+    public function setEmployeeInfo(?string $employee_info): self
     {
-        $this->access_info = $access_info;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Order[]
-     */
-    public function getOrders(): Collection
-    {
-        return $this->orders;
-    }
-
-    public function addOrder(Order $order): self
-    {
-        if (!$this->orders->contains($order)) {
-            $this->orders[] = $order;
-            $order->setCustomer($this);
-        }
+        $this->employee_info = $employee_info;
 
         return $this;
     }
 
 
-    public function removeOrder(Order $order): self
-    {
-        if ($this->orders->removeElement($order)) {
-            // set the owning side to null (unless already changed)
-            if ($order->getCustomer() === $this) {
-                $order->setCustomer(null);
-            }
-        }
-
-        return $this;
-    }
 }

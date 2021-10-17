@@ -23,6 +23,10 @@ class Product
      */
     private $title;
 
+    public function __toString(){
+        return $this->title;
+    }
+
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -42,6 +46,30 @@ class Product
      * @ORM\OneToMany(targetEntity=ObjectInAppForm::class, mappedBy="product")
      */
     private $object_in_app_form;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="product")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $category;
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
 
     public function __construct()
     {
@@ -127,6 +155,18 @@ class Product
                 $objectInAppForm->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

@@ -23,22 +23,60 @@ class Service
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $title;
+    private ?string $title;
+
+    public function __toString(){
+        return $this->title;
+    }
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $desctiption;
+    private ?string $desctiption;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $cost;
+    private ?int $cost;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Product;
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    private ?string $service_articul;
+
+    public function getServiceArticul(): ?string
+    {
+        return $this->service_articul;
+    }
+
+    public function setServiceArticul(string $service_articul): self
+    {
+        $this->service_articul = $service_articul;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="service")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $category_serv;
+
+    public function getCategory(): ?Category
+    {
+        return $this->category_serv;
+    }
+
+    public function setCategory(?Category $category_serv): self
+    {
+        $this->category_serv = $category_serv;
+
+        return $this;
+    }
+
 
     /**
      * @ORM\OneToMany(targetEntity=ObjectInAppForm::class, mappedBy="service")

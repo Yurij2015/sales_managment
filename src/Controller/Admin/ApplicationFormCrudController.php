@@ -4,6 +4,10 @@ namespace App\Controller\Admin;
 
 use App\Entity\ApplicationForm;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class ApplicationFormCrudController extends AbstractCrudController
 {
@@ -12,14 +16,15 @@ class ApplicationFormCrudController extends AbstractCrudController
         return ApplicationForm::class;
     }
 
-    /*
+
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            TextField::new('aplformtitle'),
+            DateField::new('appdate'),
+            BooleanField::new('app_status'),
+            AssociationField::new('orders')
         ];
     }
-    */
+
 }

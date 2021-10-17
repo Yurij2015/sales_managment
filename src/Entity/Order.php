@@ -18,6 +18,27 @@ class Order
      */
     private $id;
 
+    public function __toString(){
+        return $this->ordertitle;
+    }
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ordertitle;
+
+    public function getOrdertitle(): ?string
+    {
+        return $this->ordertitle;
+    }
+
+    public function setOrdertitle(string $ordertitle): self
+    {
+        $this->ordertitle = $ordertitle;
+
+        return $this;
+    }
+
     /**
      * @ORM\Column(type="datetime")
      */

@@ -23,7 +23,7 @@ class Service
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $title;
+    private ?string $title;
 
     public function __toString(){
         return $this->title;
@@ -32,12 +32,12 @@ class Service
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $desctiption;
+    private ?string $desctiption;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $cost;
+    private ?int $cost;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -45,7 +45,7 @@ class Service
     /**
      * @ORM\Column(type="string", length=30)
      */
-    private $service_articul;
+    private ?string $service_articul;
 
     public function getServiceArticul(): ?string
     {

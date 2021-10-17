@@ -19,6 +19,16 @@ class ApplicationForm
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $aplformtitle;
+
+    public function getAplformtitle(): ?string
+    {
+        return $this->aplformtitle;
+    }
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $appdate;
@@ -30,7 +40,7 @@ class ApplicationForm
 
     /**
      * @ORM\OneToOne(targetEntity=Order::class, inversedBy="application_form_id", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $orders;
 

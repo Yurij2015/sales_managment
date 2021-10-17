@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\BranchRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +27,16 @@ class Branch
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $description;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Employee::class, mappedBy="branch")
+     */
+    private $branch;
+
+    public function __construct()
+    {
+        $this->branch = new ArrayCollection();
+    }
 
 
     public function getId(): ?int

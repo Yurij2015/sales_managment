@@ -52,6 +52,25 @@ class Product
      */
     private $image;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="product")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $category;
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+
     public function __construct()
     {
         $this->object_in_app_form = new ArrayCollection();

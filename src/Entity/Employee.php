@@ -60,6 +60,24 @@ class Employee
         return $this;
     }
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Branch::class, inversedBy="employee")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $branch;
+
+    public function getBranch(): ?Branch
+    {
+        return $this->branch;
+    }
+
+    public function setBranch(?Branch $branch): self
+    {
+        $this->branch = $branch;
+
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

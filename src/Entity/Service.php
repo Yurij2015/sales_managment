@@ -60,6 +60,25 @@ class Service
     }
 
     /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="service")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $category_serv;
+
+    public function getCategory(): ?Category
+    {
+        return $this->category_serv;
+    }
+
+    public function setCategory(?Category $category_serv): self
+    {
+        $this->category_serv = $category_serv;
+
+        return $this;
+    }
+
+
+    /**
      * @ORM\OneToMany(targetEntity=ObjectInAppForm::class, mappedBy="service")
      */
     private $object_in_app_form;

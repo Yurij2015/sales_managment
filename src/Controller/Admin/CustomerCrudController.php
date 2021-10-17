@@ -48,7 +48,9 @@ class CustomerCrudController extends AbstractCrudController
         yield TextField::new('address');
         yield TextField::new('phone');
         yield EmailField::new('email');
-        yield TextEditorField::new('access_info');
+        yield TextEditorField::new('access_info')->formatValue(function ($value) {
+            return $value;
+        });
     }
 
 }

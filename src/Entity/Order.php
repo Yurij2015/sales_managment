@@ -32,6 +32,13 @@ class Order
         return $this->ordertitle;
     }
 
+    public function setOrdertitle(string $ordertitle): self
+    {
+        $this->ordertitle = $ordertitle;
+
+        return $this;
+    }
+
     /**
      * @ORM\Column(type="datetime")
      */

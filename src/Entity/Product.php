@@ -23,6 +23,10 @@ class Product
      */
     private $title;
 
+    public function __toString(){
+        return $this->title;
+    }
+
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */

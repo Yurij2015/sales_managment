@@ -25,6 +25,10 @@ class Service
      */
     private $title;
 
+    public function __toString(){
+        return $this->title;
+    }
+
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -38,7 +42,22 @@ class Service
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Product;
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    private $service_articul;
+
+    public function getServiceArticul(): ?string
+    {
+        return $this->service_articul;
+    }
+
+    public function setServiceArticul(string $service_articul): self
+    {
+        $this->service_articul = $service_articul;
+
+        return $this;
+    }
 
     /**
      * @ORM\OneToMany(targetEntity=ObjectInAppForm::class, mappedBy="service")

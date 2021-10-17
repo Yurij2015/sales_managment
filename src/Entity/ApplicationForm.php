@@ -23,9 +23,22 @@ class ApplicationForm
      */
     private $aplformtitle;
 
+
+    public function __toString(){
+        return $this->aplformtitle;
+    }
+
+
     public function getAplformtitle(): ?string
     {
         return $this->aplformtitle;
+    }
+
+    public function setAplformtitle(string $aplformtitle): self
+    {
+        $this->aplformtitle = $aplformtitle;
+
+        return $this;
     }
 
     /**

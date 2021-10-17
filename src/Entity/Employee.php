@@ -42,6 +42,23 @@ class Employee
      */
     private $employee_info;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Position::class, inversedBy="employee")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $position;
+
+    public function getPosition(): ?Position
+    {
+        return $this->position;
+    }
+
+    public function setPosition(?Position $position): self
+    {
+        $this->position = $position;
+
+        return $this;
+    }
 
     public function getId(): ?int
     {

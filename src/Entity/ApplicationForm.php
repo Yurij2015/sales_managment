@@ -44,23 +44,23 @@ class ApplicationForm
     /**
      * @ORM\Column(type="datetime")
      */
-    private $appdate;
+    private ?\DateTimeInterface $appdate;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $app_status;
+    private ?int $app_status;
 
     /**
      * @ORM\OneToOne(targetEntity=Order::class, inversedBy="application_form_id", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
-    private $orders;
+    private ?Order $orders;
 
     /**
      * @ORM\OneToMany(targetEntity=ObjectInAppForm::class, mappedBy="applicationForm", orphanRemoval=true)
      */
-    private $object_in_app_form;
+    private ArrayCollection $object_in_app_form;
 
     public function __construct()
     {

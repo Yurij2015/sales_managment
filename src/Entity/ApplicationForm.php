@@ -21,7 +21,7 @@ class ApplicationForm
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $aplformtitle;
+    private ?string $aplformtitle;
 
 
     public function __toString(){
